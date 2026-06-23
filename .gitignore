@@ -1,0 +1,18 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Dataset images
+data/
+
+# Attendance records
+attendance/attendance.csv
+
+# VS Code
+.vscode/
+
+# Environment
+venv/
+
+# Temporary files
+*.log
