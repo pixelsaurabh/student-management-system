@@ -1,6 +1,10 @@
 import cv2
 import numpy as np
+
+from attendance_system import mark_attendance
 from config import CAMERA_INDEX
+
+marked_students = set()
 
 cap = cv2.VideoCapture(CAMERA_INDEX)
 
@@ -31,13 +35,23 @@ while True:
         face = cv2.resize(face, (200, 200))
 
         label, confidence = model.predict(face)
+        cv2.putText(frame,
+            f"{label_map.get(label)} {confidence:.2f}",
+            (x, y-40),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (255, 0, 0),
+            2)
 
-        # Convert label to name
-        name = label_map.get(label, "Unknown")
+        if confidence < 50:
+            name = label_map.get(label, "Unknown")
+            display_text = name
 
-        # Confidence control
-        if confidence < 80:
-            display_text = f"{name}"
+            # Mark attendance automatically
+            if name not in marked_students:
+                mark_attendance(name)
+                marked_students.add(name)
+
         else:
             display_text = "Unknown"
 

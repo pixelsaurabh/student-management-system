@@ -2,6 +2,7 @@ import csv
 import os
 from datetime import datetime
 
+
 def mark_attendance(name):
     file_path = "attendance/attendance.csv"
 
@@ -34,5 +35,3 @@ def mark_attendance(name):
 
     else:
         print(f"{name} already marked today")
-
-mark_attendance("Saurabh")
