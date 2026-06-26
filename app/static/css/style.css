@@ -1,0 +1,31 @@
+body{
+
+    background:#f8f9fa;
+
+    min-height:100vh;
+
+}
+
+.navbar{
+
+    font-size:18px;
+
+}
+
+footer{
+
+    margin-top:100px;
+
+}
+
+.display-4{
+
+    margin-top:70px;
+
+}
+
+.btn{
+
+    min-width:220px;
+
+}

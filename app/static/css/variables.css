@@ -1,0 +1,70 @@
+/* 
+   College Attendance Management Portal
+   Design System Variables
+   Version : 0.2
+ */
+
+:root{
+
+    /* COLORS */
+
+    --primary-color:#2563EB;
+    --primary-hover:#1D4ED8;
+
+    --secondary-color:#64748B;
+
+    --success-color:#22C55E;
+
+    --warning-color:#F59E0B;
+
+    --danger-color:#EF4444;
+
+    --info-color:#06B6D4;
+
+    --background-color:#F8FAFC;
+
+    --card-color:#FFFFFF;
+
+    --sidebar-color:#1E293B;
+
+    --navbar-color:#FFFFFF;
+
+    --text-color:#1E293B;
+
+    --text-light:#64748B;
+
+    --border-color:#E2E8F0;
+
+    /* 
+       FONT
+     */
+
+    --font-family:'Poppins',sans-serif;
+
+    /* 
+       BORDER RADIUS
+     */
+
+    --radius-sm:8px;
+
+    --radius-md:12px;
+
+    --radius-lg:18px;
+
+    /* 
+       SHADOWS
+     */
+
+    --shadow-sm:0 2px 8px rgba(0,0,0,.05);
+
+    --shadow-md:0 8px 20px rgba(0,0,0,.08);
+
+    --shadow-lg:0 12px 30px rgba(0,0,0,.12);
+
+    /* 
+       TRANSITIONS
+     */
+
+    --transition:.3s ease;
+
+}
