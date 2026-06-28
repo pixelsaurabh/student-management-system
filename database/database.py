@@ -1,42 +1,36 @@
 import sqlite3
 
-DATABASE_NAME = "database/student_management.db"
+
+DATABASE = "database/student_management.db"
 
 
-def create_database():
+def get_connection():
 
-    conn = sqlite3.connect(DATABASE_NAME)
+    connection = sqlite3.connect(DATABASE)
 
-    cursor = conn.cursor()
+    connection.row_factory = sqlite3.Row
 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS students(
+    return connection
 
-        student_id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-        name TEXT NOT NULL,
+def check_admin_login(email, password):
 
-        roll_number TEXT UNIQUE,
+    connection = get_connection()
 
-        branch TEXT,
+    cursor = connection.cursor()
 
-        year TEXT,
-
-        section TEXT,
-
-        email TEXT,
-
-        phone TEXT
-
+    cursor.execute(
+        """
+        SELECT *
+        FROM admins
+        WHERE email = ?
+        AND password = ?
+        """,
+        (email, password)
     )
-    """)
 
-    conn.commit()
+    admin = cursor.fetchone()
 
-    conn.close()
+    connection.close()
 
-    print("Database Created Successfully")
-
-
-if __name__ == "__main__":
-    create_database()
+    return admin

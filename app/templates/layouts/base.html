@@ -1,101 +1,120 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="College Attendance Management Portal">
+    <meta name="description" content="College Attendance Management Portal" />
 
     <title>
-
-        {% block title %}
-
-        College Attendance Management Portal
-
-        {% endblock %}
-
+      {% block title %} College Attendance Management Portal {% endblock %}
     </title>
 
     <!-- Google Font -->
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Bootstrap -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Bootstrap Icons -->
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
 
-    <!-- CSS -->
+    <!-- Base -->
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/variables.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base/variables.css') }}"
+    />
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/base.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base/base.css') }}"
+    />
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/layout.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base/typography.css') }}"
+    />
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/components.css') }}">
+    <!-- Layout -->
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/layout/sidebar.css') }}"
+    />
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/forms.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/layout/navbar.css') }}"
+    />
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/responsive.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/layout/footer.css') }}"
+    />
 
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/layout/responsive.css') }}"
+    />
 
-<body>
+    <!-- Components -->
 
-<div class="app-container">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/components/buttons.css') }}"
+    />
 
-    {% include "components/sidebar.html" %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/components/cards.css') }}"
+    />
 
-    <div class="main-wrapper">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/components/forms.css') }}"
+    />
 
+    <!-- Pages -->
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/pages/dashboard.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="app-container">
+      {% include "components/sidebar.html" %}
+
+      <div class="main-wrapper">
         {% include "components/navbar.html" %}
 
-        <main class="content">
-
-            {% block content %}
-
-            {% endblock %}
-
-        </main>
+        <main class="content">{% block content %} {% endblock %}</main>
 
         {% include "components/footer.html" %}
-
+      </div>
     </div>
 
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-</body>
-
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
 </html>

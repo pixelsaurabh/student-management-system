@@ -7,7 +7,15 @@ Framework : Flask
 
 """
 
-from flask import Flask, render_template
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    session
+)
+from database.database import check_admin_login
 
 #
 # Create Flask Application
@@ -18,6 +26,7 @@ app = Flask(
     template_folder="app/templates",
     static_folder="app/static"
 )
+app.secret_key = "camp_secret_key_2026"
 
 #
 # Dashboard (Home Page)
@@ -26,6 +35,11 @@ app = Flask(
 
 @app.route("/")
 def dashboard():
+
+    if not session.get("logged_in"):
+
+        return redirect(url_for("login"))
+
     return render_template("dashboard/dashboard.html")
 
 
@@ -33,8 +47,29 @@ def dashboard():
 # Authentication
 #
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
+
+    if request.method == "POST":
+
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        admin = check_admin_login(email, password)
+
+        if admin:
+
+            session["logged_in"] = True
+            session["admin_email"] = admin["email"]
+            session["admin_name"] = admin["name"]
+
+            return redirect(url_for("dashboard"))
+
+        return render_template(
+            "auth/login.html",
+            error="Invalid Email or Password"
+        )
+
     return render_template("auth/login.html")
 
 
@@ -98,7 +133,10 @@ def qr():
 
 @app.route("/logout")
 def logout():
-    return "<h2>Logout Module - Coming Soon</h2>"
+
+    session.clear()
+
+    return redirect(url_for("login"))
 
 
 #
