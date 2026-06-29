@@ -54,7 +54,7 @@ The CAMP dashboard is now operational and ready for Student Management implement
 ## Sprint Progress
 
 - ✅ Sprint 1 - ERP Foundation
-- ✅ Sprint 2 - Authentication & Dashboard
+- ✅ Sprint 2 - Authentication & Dashboard, favicon
 - ⏳ Sprint 3 - Student Management
 - ⏳ Sprint 4 - Face Recognition
 - ⏳ Sprint 5 - QR Verification & Reports
