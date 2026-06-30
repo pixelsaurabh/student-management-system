@@ -7,6 +7,11 @@ Framework : Flask
 
 """
 
+from app.services.student_service import (
+    get_all_students,
+    insert_student
+)
+
 from flask import (
     Flask,
     render_template,
@@ -40,7 +45,11 @@ def dashboard():
 
         return redirect(url_for("login"))
 
-    return render_template("dashboard/dashboard.html")
+    return render_template(
+        "dashboard/dashboard.html",
+        active_page="dashboard",
+        page_title="Dashboard"
+    )
 
 
 #
@@ -77,9 +86,36 @@ def login():
 # Student Registration
 #
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("student/register.html")
+
+    if request.method == "POST":
+
+        name = request.form.get("name")
+        roll_number = request.form.get("roll_number")
+        branch = request.form.get("branch")
+        year = request.form.get("year")
+        section = request.form.get("section")
+        email = request.form.get("email")
+        phone = request.form.get("phone")
+
+        insert_student(
+            name,
+            roll_number,
+            branch,
+            year,
+            section,
+            email,
+            phone
+        )
+
+        return redirect(url_for("students"))
+
+    return render_template(
+        "student/register.html",
+        active_page="students",
+        page_title="Register Student"
+    )
 
 
 #
@@ -88,7 +124,15 @@ def register():
 
 @app.route("/students")
 def students():
-    return render_template("student/students.html")
+
+    students = get_all_students()
+
+    return render_template(
+        "student/students.html",
+        students=students,
+        active_page="students",
+        page_title="Students"
+    )
 
 
 #
@@ -97,7 +141,12 @@ def students():
 
 @app.route("/attendance")
 def attendance():
-    return render_template("attendance/attendance.html")
+
+    return render_template(
+        "attendance/attendance.html",
+        active_page="attendance",
+        page_title="Attendance"
+    )
 
 
 #
@@ -106,7 +155,12 @@ def attendance():
 
 @app.route("/reports")
 def reports():
-    return render_template("reports/reports.html")
+
+    return render_template(
+        "reports/reports.html",
+        active_page="reports",
+        page_title="Reports"
+    )
 
 
 #
@@ -115,7 +169,12 @@ def reports():
 
 @app.route("/settings")
 def settings():
-    return render_template("settings/settings.html")
+
+    return render_template(
+        "settings/settings.html",
+        active_page="settings",
+        page_title="Settings"
+    )
 
 
 #
@@ -124,7 +183,12 @@ def settings():
 
 @app.route("/qr")
 def qr():
-    return "<h2>QR Verification Module - Coming Soon</h2>"
+
+    return render_template(
+        "qr/qr.html",
+        active_page="qr",
+        page_title="QR Verification"
+    )
 
 
 #

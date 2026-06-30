@@ -1,0 +1,139 @@
+/* ======================================
+   Student Header
+====================================== */
+
+.student-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+.header-left h2{
+
+    font-size:32px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.header-left p{
+
+    color:var(--text-secondary);
+
+}
+
+.header-right .btn-primary-custom{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+/* ======================================
+   Student Table
+====================================== */
+
+.student-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.student-table th{
+
+    background:#2563EB;
+
+    color:white;
+
+    padding:16px;
+
+    text-align:left;
+
+}
+
+.student-table td{
+
+    padding:16px;
+
+    border-bottom:1px solid #E5E7EB;
+
+}
+
+.student-table tbody tr:hover{
+
+    background:#F8FAFC;
+
+}
+
+.btn-edit{
+
+    color:#2563EB;
+
+    margin-right:15px;
+
+    font-size:18px;
+
+}
+
+.btn-delete{
+
+    background:none;
+
+    color:#EF4444;
+
+    font-size:18px;
+
+}
+
+/* ======================================
+   Empty State
+====================================== */
+
+.empty-state{
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    color:var(--text-secondary);
+
+}
+
+.empty-state i{
+
+    font-size:60px;
+
+    color:var(--primary-color);
+
+    display:block;
+
+    margin-bottom:20px;
+
+}
+
+.empty-state h4{
+
+    margin-bottom:10px;
+
+    font-weight:600;
+
+}
+
+.empty-state p{
+
+    margin:0;
+
+}

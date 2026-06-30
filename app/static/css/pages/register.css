@@ -1,0 +1,77 @@
+/* ======================================
+   Register Student
+====================================== */
+
+.page-header{
+
+    margin-bottom:30px;
+
+}
+
+.page-header h2{
+
+    font-size:32px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.page-header p{
+
+    color:var(--text-secondary);
+
+}
+
+/* ======================================
+   Form Grid
+====================================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+.form-group input{
+
+    height:48px;
+
+}
+
+.full-width{
+
+    grid-column:1 / -1;
+
+}
+
+.form-actions{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+}
