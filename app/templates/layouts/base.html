@@ -123,6 +123,32 @@
       <div class="main-wrapper">
         {% include "components/navbar.html" %}
 
+        <!-- Flash Messages -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+
+        <div class="container mt-3">
+          {% for category, message in messages %}
+
+          <div
+            class="alert alert-{{ category }} alert-dismissible fade show"
+            role="alert"
+          >
+            {{ message }}
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+            ></button>
+          </div>
+
+          {% endfor %}
+        </div>
+
+        {% endif %} {% endwith %}
+
         <main class="content">{% block content %} {% endblock %}</main>
 
         {% include "components/footer.html" %}

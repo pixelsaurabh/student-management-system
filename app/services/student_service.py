@@ -10,7 +10,29 @@ def get_all_students():
     return students
 
 
-def insert_student(name, roll_number, branch, year, section, email, phone):
+def check_roll_number_exists(university_roll_number):
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT student_id
+        FROM students
+        WHERE university_roll_number = ?
+        """,
+        (university_roll_number,)
+    )
+
+    student = cursor.fetchone()
+
+    connection.close()
+
+    return student is not None
+
+
+def insert_student(name, university_roll_number, branch, year, section, email, phone):
 
     connection = get_connection()
 
@@ -21,7 +43,7 @@ def insert_student(name, roll_number, branch, year, section, email, phone):
         INSERT INTO students
         (
             name,
-            roll_number,
+            university_roll_number,
             branch,
             year,
             section,
@@ -36,13 +58,80 @@ def insert_student(name, roll_number, branch, year, section, email, phone):
         """,
         (
             name,
-            roll_number,
+            university_roll_number,
             branch,
             year,
             section,
             email,
             phone
         )
+    )
+
+    connection.commit()
+
+    connection.close()
+
+
+def update_student(
+    student_id,
+    name,
+    university_roll_number,
+    branch,
+    year,
+    section,
+    email,
+    phone
+):
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        UPDATE students
+
+        SET
+
+        name = ?,
+        university_roll_number = ?,
+        branch = ?,
+        year = ?,
+        section = ?,
+        email = ?,
+        phone = ?
+
+        WHERE student_id = ?
+        """,
+        (
+            name,
+            university_roll_number,
+            branch,
+            year,
+            section,
+            email,
+            phone,
+            student_id
+        )
+    )
+
+    connection.commit()
+
+    connection.close()
+
+
+def delete_student(student_id):
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        DELETE FROM students
+        WHERE student_id = ?
+        """,
+        (student_id,)
     )
 
     connection.commit()

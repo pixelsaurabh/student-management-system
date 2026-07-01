@@ -33,4 +33,4 @@ Implement Student Registration with SQLite Database.
 
 See:
 
-docs/README_IMAGES/sprint3/
+docs/README_IMAGES/sprint3/=`

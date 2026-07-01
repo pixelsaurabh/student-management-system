@@ -1,7 +1,7 @@
 """
 
 College Attendance Management Portal (CAMP)
-Version : 0.2
+Version : 0.4
 Developer : Saurabh Mishra
 Framework : Flask
 
@@ -9,7 +9,10 @@ Framework : Flask
 
 from app.services.student_service import (
     get_all_students,
-    insert_student
+    insert_student,
+    update_student,
+    delete_student,
+    check_roll_number_exists
 )
 
 from flask import (
@@ -18,8 +21,10 @@ from flask import (
     request,
     redirect,
     url_for,
-    session
+    session,
+    flash
 )
+
 from database.database import check_admin_login
 
 #
@@ -92,21 +97,44 @@ def register():
     if request.method == "POST":
 
         name = request.form.get("name")
-        roll_number = request.form.get("roll_number")
+        university_roll_number = request.form.get("university_roll_number")
         branch = request.form.get("branch")
         year = request.form.get("year")
         section = request.form.get("section")
         email = request.form.get("email")
         phone = request.form.get("phone")
 
+        if not phone.isdigit() or len(phone) != 10:
+
+            flash(
+                "Phone number must contain exactly 10 digits.",
+                "warning"
+            )
+
+            return redirect(url_for("register"))
+
+        if check_roll_number_exists(university_roll_number):
+
+            flash(
+                "University Roll Number already exists!",
+                "warning"
+            )
+
+            return redirect(url_for("register"))
+
         insert_student(
             name,
-            roll_number,
+            university_roll_number,
             branch,
             year,
             section,
             email,
             phone
+        )
+
+        flash(
+            "Student registered successfully!",
+            "success"
         )
 
         return redirect(url_for("students"))
@@ -127,9 +155,12 @@ def students():
 
     students = get_all_students()
 
+    student_count = len(students)
+
     return render_template(
         "student/students.html",
         students=students,
+        student_count=student_count,
         active_page="students",
         page_title="Students"
     )
@@ -203,9 +234,55 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/update-student", methods=["POST"])
+def update_student_route():
+    student_id = request.form.get("student_id")
+    name = request.form.get("name")
+    university_roll_number = request.form.get("university_roll_number")
+    branch = request.form.get("branch")
+    year = request.form.get("year")
+    section = request.form.get("section")
+    email = request.form.get("email")
+    phone = request.form.get("phone")
+
+    update_student(
+        student_id,
+        name,
+        university_roll_number,
+        branch,
+        year,
+        section,
+        email,
+        phone
+    )
+
+    flash(
+        "Student updated successfully!",
+        "success"
+    )
+
+    return redirect(url_for("students"))
+
+
+@app.route("/delete-student", methods=["POST"])
+def delete_student_route():
+
+    student_id = request.form.get("student_id")
+
+    delete_student(student_id)
+
+    flash(
+        "Student deleted successfully!",
+        "success"
+    )
+
+    return redirect(url_for("students"))
+
+
 #
 # Run Application
 #
+
 
 if __name__ == "__main__":
     app.run(debug=True)
